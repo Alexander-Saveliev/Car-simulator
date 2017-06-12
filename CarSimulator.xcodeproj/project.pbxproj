@@ -10,6 +10,10 @@
 		405C1F571EE70FF1008D873D /* CarSimulatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405C1F4F1EE70F63008D873D /* CarSimulatorTest.swift */; };
 		405C1F591EE7108D008D873D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405C1F421EE70F18008D873D /* main.swift */; };
 		405C1F5A1EE71094008D873D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405C1F421EE70F18008D873D /* main.swift */; };
+		40BA5DCF1EED3CCA00E37D01 /* CarClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE768E1EEBD685008855F7 /* CarClass.swift */; };
+		40BA5DD11EED406900E37D01 /* Instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BA5DD01EED406900E37D01 /* Instructions.swift */; };
+		40BA5DD21EED406900E37D01 /* Instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BA5DD01EED406900E37D01 /* Instructions.swift */; };
+		40FE768F1EEBD685008855F7 /* CarClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE768E1EEBD685008855F7 /* CarClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +34,8 @@
 		405C1F4D1EE70F63008D873D /* CarSimulatorTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarSimulatorTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		405C1F4F1EE70F63008D873D /* CarSimulatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarSimulatorTest.swift; sourceTree = "<group>"; };
 		405C1F511EE70F63008D873D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40BA5DD01EED406900E37D01 /* Instructions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instructions.swift; sourceTree = "<group>"; };
+		40FE768E1EEBD685008855F7 /* CarClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				405C1F421EE70F18008D873D /* main.swift */,
+				40FE768E1EEBD685008855F7 /* CarClass.swift */,
+				40BA5DD01EED406900E37D01 /* Instructions.swift */,
 			);
 			path = CarSimulator;
 			sourceTree = "<group>";
@@ -175,7 +183,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40BA5DD11EED406900E37D01 /* Instructions.swift in Sources */,
 				405C1F591EE7108D008D873D /* main.swift in Sources */,
+				40FE768F1EEBD685008855F7 /* CarClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +194,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				405C1F5A1EE71094008D873D /* main.swift in Sources */,
+				40BA5DCF1EED3CCA00E37D01 /* CarClass.swift in Sources */,
+				40BA5DD21EED406900E37D01 /* Instructions.swift in Sources */,
 				405C1F571EE70FF1008D873D /* CarSimulatorTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +354,7 @@
 				405C1F481EE70F18008D873D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		405C1F521EE70F63008D873D /* Build configuration list for PBXNativeTarget "CarSimulatorTest" */ = {
 			isa = XCConfigurationList;
@@ -350,6 +363,7 @@
 				405C1F541EE70F63008D873D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

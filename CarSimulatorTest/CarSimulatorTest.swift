@@ -21,142 +21,74 @@ class CarSimulatorTest: XCTestCase {
         super.tearDown()
     }
   
+  // the engine is off, gear is 0, speed is 0, stand
+  let ferrari = Car()
   
+  // can't turn off the engine, set gear and set speed
+  func testTurnOffEngine() {
+    ferrari.resetCar()
+    
+    XCTAssertFalse( ferrari.turnOffEngine() )
+    XCTAssertFalse( ferrari.setGear(withGear: 1) )
+    XCTAssertFalse( ferrari.setSpeed(withSpeed: 10) )
+  }
+  
+  // can turn on engine. Can set gear 1 , -1 when the engine is on
   func testTurnOnEngine() {
-    let ferrari = Car()
+    ferrari.resetCar()
     
     XCTAssertTrue( ferrari.turnOnEngine() )
-    XCTAssertFalse( ferrari.turnOnEngine() )
-    
-    ferrari.resetCar()
-    ferrari.gear = 2
-    XCTAssertFalse( ferrari.turnOnEngine() )
-    
-    ferrari.resetCar()
-    ferrari.direction = .forward
-    XCTAssertFalse( ferrari.turnOnEngine() )
-    
-    ferrari.resetCar()
-    ferrari.speed = 2
-    XCTAssertFalse( ferrari.turnOnEngine() )
-  }
-  
-  
-  func testTurnOffEngine() {
-    let ferrari = Car()
-    
-    XCTAssertFalse( ferrari.turnOffEngine() )
-    
-    ferrari.engineStatus = .on
-    XCTAssertTrue( ferrari.turnOffEngine() )
-    
-    ferrari.engineStatus = .on
-    ferrari.gear = -1
-    XCTAssertFalse( ferrari.turnOffEngine() )
-    
-    ferrari.engineStatus = .on
-    ferrari.gear = 0
-    ferrari.direction = .backward
-    XCTAssertFalse( ferrari.turnOffEngine() )
-    
-    ferrari.engineStatus = .on
-    ferrari.gear = 0
-    ferrari.speed = 2
-    XCTAssertFalse( ferrari.turnOnEngine() )
-    
-  }
-  
-  
-  func testSetGear() {
-    let ferrari = Car()
-    XCTAssertFalse( ferrari.setGear(withGear: 3) )
-    
-    ferrari.speed = 1
-    XCTAssertFalse( ferrari.setGear(withGear: -1) )
-    
-    ferrari.resetCar()
-    ferrari.gear = 1
-    XCTAssertFalse( ferrari.setGear(withGear: -1) )
-    
-    ferrari.resetCar()
-    ferrari.engineStatus = .on
-    XCTAssertTrue( ferrari.setGear(withGear: -1) )
-    
-    ferrari.resetCar()
-    ferrari.engineStatus = .on
-    ferrari.gear = 1
-    XCTAssertTrue( ferrari.setGear(withGear: -1) )
-    
-    ferrari.resetCar()
-    ferrari.engineStatus = .on
-    ferrari.direction = .backward
-    XCTAssertFalse( ferrari.setGear(withGear: 1) )
-    
-    ferrari.resetCar()
-    ferrari.engineStatus = .on
-    ferrari.direction = .forward
-    XCTAssertFalse( ferrari.setGear(withGear: -1) )
-    
-    ferrari.resetCar()
-    ferrari.engineStatus = .on
-    ferrari.direction = .forward
-    ferrari.gear = 3
-    ferrari.speed = 50
-    XCTAssertTrue( ferrari.setGear(withGear: 4) )
-    
-    ferrari.resetCar()
-    ferrari.engineStatus = .on
-    ferrari.direction = .forward
-    ferrari.gear = 3
-    ferrari.speed = 49
-    XCTAssertFalse( ferrari.setGear(withGear: 5) )
-    
-    ferrari.resetCar()
-    ferrari.engineStatus = .on
-    ferrari.direction = .backward
-    ferrari.gear = -1
-    ferrari.speed = 10
-    XCTAssertFalse( ferrari.setGear(withGear: 1) )
-    
-    ferrari.resetCar()
-    ferrari.engineStatus = .on
-    ferrari.direction = .stand
-    ferrari.gear = -1
-    ferrari.speed = 0
     XCTAssertTrue( ferrari.setGear(withGear: 1) )
-    
-    ferrari.resetCar()
-    ferrari.engineStatus = .on
-    ferrari.direction = .backward
-    ferrari.gear = -1
-    ferrari.speed = 10
-    XCTAssertTrue( ferrari.setGear(withGear: 0) )
-    
-    XCTAssertTrue( ferrari.setGear(withGear: 0) )
-    
-    XCTAssertFalse( ferrari.setGear(withGear: 1) )
-    XCTAssertFalse( ferrari.setGear(withGear: -1) )
-    
-    ferrari.resetCar()
-    ferrari.gear = 1
-    XCTAssertFalse( ferrari.setGear(withGear: -1) )
-    XCTAssertFalse( ferrari.setGear(withGear: 2) )
-    XCTAssertTrue( ferrari.setGear(withGear: 0) )
-    
+    XCTAssertTrue( ferrari.setGear(withGear: -1) )
   }
   
+  // can't turn off the engine with a gear
+  func testTurnOffEngineWithGear() {
+    ferrari.resetCar()
+    ferrari.turnOnEngine()
+    ferrari.setGear(withGear: 1)
+    
+    XCTAssertFalse( ferrari.turnOffEngine() )
+    
+    ferrari.setGear(withGear: -1)
+    
+    XCTAssertFalse( ferrari.turnOffEngine() )
+  }
+  
+  // with 1 gear can set speed [0 .. 30], set gear 0, set -1 gear with speed 0, set gear 2 with speed [20 .. 30]
+  func testFirstGear() {
+    ferrari.resetCar()
+    ferrari.turnOnEngine()
+    ferrari.setGear(withGear: 1)
+    
+    XCTAssertTrue(ferrari.setSpeed(withSpeed: 10))
+    XCTAssertFalse(ferrari.setSpeed(withSpeed: 40))
+    XCTAssertTrue(ferrari.setGear(withGear: 0))
+    XCTAssertFalse(ferrari.setGear(withGear: -1))
+    
+    ferrari.setSpeed(withSpeed: 0)
+    XCTAssertTrue(ferrari.setGear(withGear: -1))
+    
+    ferrari.setGear(withGear: 1)
+    ferrari.setSpeed(withSpeed: 19)
+    
+    XCTAssertFalse(ferrari.setGear(withGear: 2))
 
-  func testSetSpeed() {
-    let ferrari = Car()
-    XCTAssertFalse( ferrari.setSpeed(withSpeed: 1))
-    ferrari.engineStatus = .on
-    ferrari.direction = .forward
-    ferrari.gear = 2
-    ferrari.speed = 30
-    XCTAssertFalse( ferrari.setSpeed(withSpeed: 60))
-    XCTAssertFalse( ferrari.setSpeed(withSpeed: 19))
-    XCTAssertTrue( ferrari.setSpeed(withSpeed: 30))
-    XCTAssertTrue( ferrari.setSpeed(withSpeed: 40))
+    ferrari.setSpeed(withSpeed: 20)
+    XCTAssertTrue(ferrari.setGear(withGear: 2))
+  }
+  
+  // with gear 0 and stright movement. Can't increase a speed, can reducs a speed or save
+  func testZerotGear() {
+    ferrari.resetCar()
+    ferrari.turnOnEngine()
+    ferrari.setGear(withGear: 1)
+    ferrari.setSpeed(withSpeed: 10)
+    ferrari.setGear(withGear: 0)
+    
+    XCTAssertFalse(ferrari.setSpeed(withSpeed: 15))
+    XCTAssertTrue(ferrari.setSpeed(withSpeed: 10))
+    XCTAssertTrue(ferrari.setSpeed(withSpeed: 9))
   }
   
 }
